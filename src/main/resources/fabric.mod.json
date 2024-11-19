@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "movementtest2",
+	"version": "${version}",
+	"name": "MovementTest2",
+	"description": "Working on a movement tech mod",
+	"authors": [
+		"faroob"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/movementtest2/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.faroob.movementtest.MovementTest2"
+		],
+		"client": [
+			"net.faroob.movementtest.MovementTest2Client"
+		],
+		"fabric-datagen": [
+			"net.faroob.movementtest.MovementTest2DataGenerator"
+		]
+	},
+	"mixins": [
+		"movementtest2.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
