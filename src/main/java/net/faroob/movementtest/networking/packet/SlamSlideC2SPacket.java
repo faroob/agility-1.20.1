@@ -18,8 +18,9 @@ public class SlamSlideC2SPacket {
         onGround = player.isOnGround();
         if (onGround) {
             sliding = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)), 0, Math.cos(Math.toRadians(yaw)));
+            player.setVelocity(-Math.sin(Math.toRadians(yaw)), -1, Math.cos(Math.toRadians(yaw)));
         }
+        System.out.println(player.isOnGround());
     }
 
     public static void start(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
@@ -30,7 +31,6 @@ public class SlamSlideC2SPacket {
             slamming = true;
             slam(server, player, handler, buf, responseSender);
         }
-        //System.out.println();
     }
 
     public static void slam(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

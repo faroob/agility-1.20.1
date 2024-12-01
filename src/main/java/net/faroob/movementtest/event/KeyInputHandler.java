@@ -33,10 +33,7 @@ public class KeyInputHandler {
             if(!slamSlideKey.isPressed() || !SlamSlideC2SPacket.onGround){
                 SlamSlideC2SPacket.sliding = false;
             }
-            if (SlamSlideC2SPacket.onGround) {
-                SlamSlideC2SPacket.slamming = false;
-            }
-            System.out.println(!SlamSlideC2SPacket.onGround);
+            //System.out.println(!SlamSlideC2SPacket.onGround);
         });
     }
 
