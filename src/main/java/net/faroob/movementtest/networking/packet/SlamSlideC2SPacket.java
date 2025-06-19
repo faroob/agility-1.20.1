@@ -12,15 +12,16 @@ public class SlamSlideC2SPacket {
     public static boolean onGround;
     public static boolean slamming;
     public static int slamCounter;
+    private static double slideMagnitude = .5;
 
     public static void slide(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         player.velocityModified = true;
         onGround = player.isOnGround();
         if (onGround) {
             sliding = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)), -1, Math.cos(Math.toRadians(yaw)));
+            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * slideMagnitude, -1000, Math.cos(Math.toRadians(yaw)) * slideMagnitude);
+
         }
-        System.out.println(player.isOnGround());
     }
 
     public static void start(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
@@ -30,6 +31,8 @@ public class SlamSlideC2SPacket {
         }else if (!onGround) {
             slamming = true;
             slam(server, player, handler, buf, responseSender);
+        }else {
+
         }
     }
 
@@ -39,6 +42,7 @@ public class SlamSlideC2SPacket {
         player.setVelocity(0,-3,0);
         if (onGround) {
             slamming = false;
+            yaw = player.getHeadYaw();
         }
     }
 
