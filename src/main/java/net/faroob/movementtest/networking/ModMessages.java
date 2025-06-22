@@ -13,12 +13,14 @@ public class ModMessages {
     public static final Identifier SLAM_ID = new Identifier(MovementTest2.MOD_ID, "slam");
     public static final Identifier UPDATE_GROUND_ID = new Identifier(MovementTest2.MOD_ID, "update_ground_state");
 
+
     public static void registerC2SPackets() {
         ServerPlayNetworking.registerGlobalReceiver(DASH_ID, DashC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(SLIDE_ID, SlamSlideC2SPacket::slide);
         ServerPlayNetworking.registerGlobalReceiver(SLAM_SLIDE_STARTED_ID, SlamSlideC2SPacket::start);
         ServerPlayNetworking.registerGlobalReceiver(SLAM_ID, SlamSlideC2SPacket::slam);
         ServerPlayNetworking.registerGlobalReceiver(UPDATE_GROUND_ID, SlamSlideC2SPacket::updateGroundState);
+
     }
 
     public static void registerS2CPackets() {

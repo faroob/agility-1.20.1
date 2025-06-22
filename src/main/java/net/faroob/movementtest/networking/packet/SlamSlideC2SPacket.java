@@ -5,6 +5,8 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.Vec3d;
+import org.joml.Vector3d;
 
 public class SlamSlideC2SPacket {
     public static float yaw;
@@ -19,8 +21,8 @@ public class SlamSlideC2SPacket {
         onGround = player.isOnGround();
         if (onGround) {
             sliding = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * slideMagnitude, -1000, Math.cos(Math.toRadians(yaw)) * slideMagnitude);
-
+            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * slideMagnitude, 0, Math.cos(Math.toRadians(yaw)) * slideMagnitude);
+            player.setJumping(false);
         }
     }
 
@@ -31,8 +33,6 @@ public class SlamSlideC2SPacket {
         }else if (!onGround) {
             slamming = true;
             slam(server, player, handler, buf, responseSender);
-        }else {
-
         }
     }
 

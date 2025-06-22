@@ -19,6 +19,9 @@ public class MovementTest2Client implements ClientModInitializer {
     private static int dashCooldownLength = 20;
 
     @Override
+    /*
+    runs stuff on startup
+     */
     public void onInitializeClient() {
         ModMessages.registerS2CPackets();
         KeyInputHandler.register();
@@ -27,6 +30,9 @@ public class MovementTest2Client implements ClientModInitializer {
         staminaRegen();
     }
 
+    /*
+    counts how long your slam lasts for to that it can give you the correct ammount of speed in your slide
+     */
     public static void slamTimerManager() {
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             if (SlamSlideC2SPacket.slamming) {
@@ -42,7 +48,9 @@ public class MovementTest2Client implements ClientModInitializer {
             }
         });
     }
-
+    /*
+    counts the cooldown for dash
+     */
     public static void dashCounter() {
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             if (DashC2SPacket.dashCooldown) {
@@ -56,12 +64,14 @@ public class MovementTest2Client implements ClientModInitializer {
             }
         });
     }
-
+    /*
+    regenerates stamina
+     */
     public static void staminaRegen() {
-        ClientTickEvents.END_CLIENT_TICK.register((minecraftClient -> {
+        ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             if (DashC2SPacket.dashCooldown == false && stamina < staminaMax) {
                 stamina+= .5;
             }
-        }));
+        });
     }
 }

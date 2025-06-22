@@ -12,7 +12,7 @@ import javax.swing.text.html.parser.Entity;
 
 public class DashC2SPacket {
     public static boolean dashCooldown;
-    private static double dashModifier = 1.5;
+    private static double dashModifier = 1.25;
     private static int dashCost = 10;
 
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
@@ -20,7 +20,7 @@ public class DashC2SPacket {
             double pitch = player.getPitch();
             double yaw = player.getHeadYaw();
             player.velocityModified = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * Math.sin(Math.toRadians(pitch + 90)) * dashModifier , -Math.sin(Math.toRadians(pitch)) * dashModifier, Math.cos(Math.toRadians(yaw)) * Math.sin(Math.toRadians(pitch + 90)) * dashModifier );
+            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * dashModifier , 0, Math.cos(Math.toRadians(yaw)) * dashModifier );
             dashCooldown = true;
             MovementTest2Client.stamina -= dashCost;
         }

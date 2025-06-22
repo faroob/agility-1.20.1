@@ -8,6 +8,7 @@ import net.faroob.movementtest.networking.ModMessages;
 import net.faroob.movementtest.networking.packet.SlamSlideC2SPacket;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.network.PacketByteBuf;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyInputHandler {
@@ -20,7 +21,6 @@ public class KeyInputHandler {
 
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
-            //ClientPlayNetworking.send(ModMessages.UPDATE_GROUND_ID, PacketByteBufs.create());
             if(dashKey.wasPressed()){
                 ClientPlayNetworking.send(ModMessages.DASH_ID, PacketByteBufs.create());
             }
@@ -33,7 +33,6 @@ public class KeyInputHandler {
             if(!slamSlideKey.isPressed() || !SlamSlideC2SPacket.onGround){
                 SlamSlideC2SPacket.sliding = false;
             }
-            //System.out.println(!SlamSlideC2SPacket.onGround);
         });
     }
 
