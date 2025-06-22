@@ -19,8 +19,6 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(SLIDE_ID, SlamSlideC2SPacket::slide);
         ServerPlayNetworking.registerGlobalReceiver(SLAM_SLIDE_STARTED_ID, SlamSlideC2SPacket::start);
         ServerPlayNetworking.registerGlobalReceiver(SLAM_ID, SlamSlideC2SPacket::slam);
-        ServerPlayNetworking.registerGlobalReceiver(UPDATE_GROUND_ID, SlamSlideC2SPacket::updateGroundState);
-
     }
 
     public static void registerS2CPackets() {

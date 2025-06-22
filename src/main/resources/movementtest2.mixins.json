@@ -3,7 +3,8 @@
 	"package": "net.faroob.movementtest.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"ForceCrawling",
+		"StopJumping"
 	],
 	"injectors": {
 		"defaultRequire": 1

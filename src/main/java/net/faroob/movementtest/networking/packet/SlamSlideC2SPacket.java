@@ -1,6 +1,7 @@
 package net.faroob.movementtest.networking.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -14,7 +15,7 @@ public class SlamSlideC2SPacket {
     public static boolean onGround;
     public static boolean slamming;
     public static int slamCounter;
-    private static double slideMagnitude = .5;
+    private static double slideMagnitude = .75;
 
     public static void slide(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         player.velocityModified = true;
@@ -22,7 +23,6 @@ public class SlamSlideC2SPacket {
         if (onGround) {
             sliding = true;
             player.setVelocity(-Math.sin(Math.toRadians(yaw)) * slideMagnitude, 0, Math.cos(Math.toRadians(yaw)) * slideMagnitude);
-            player.setJumping(false);
         }
     }
 
