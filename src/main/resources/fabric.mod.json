@@ -1,15 +1,14 @@
 {
 	"schemaVersion": 1,
 	"id": "movementtest2",
-	"version": ".1",
+	"version": "0.1",
 	"name": "MovementTest2",
 	"description": "Working on a movement tech mod",
 	"authors": [
 		"faroob"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": ""
+		"sources": "https://github.com/faroob/movementtest2-1.20.1-master"
 	},
 	"license": "MIT",
 	"icon": "assets/movementtest2/icon.png",
