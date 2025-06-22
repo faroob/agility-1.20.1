@@ -1,13 +1,11 @@
 package net.faroob.movementtest.networking.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Vector3d;
+
 
 public class SlamSlideC2SPacket {
     public static float yaw;
@@ -16,7 +14,7 @@ public class SlamSlideC2SPacket {
     public static boolean slamming;
     public static double slamCounter = 0;
     public static double slam2SlideSpeed;
-    private static double slideMagnitude = .75;
+    private static double slideMagnitude = .5;
 
     public static void slide(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         player.velocityModified = true;
@@ -24,8 +22,7 @@ public class SlamSlideC2SPacket {
         if (onGround) {
             sliding = true;
             slam2SlideSpeed = slamCounter * .5;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * (slideMagnitude + slam2SlideSpeed), 0, Math.cos(Math.toRadians(yaw)) * (slideMagnitude + slam2SlideSpeed));
-            System.out.println(slam2SlideSpeed);
+            player.addVelocity(-Math.sin(Math.toRadians(yaw)) * (slideMagnitude + slam2SlideSpeed), 0, Math.cos(Math.toRadians(yaw)) * (slideMagnitude + slam2SlideSpeed));
         }
     }
 

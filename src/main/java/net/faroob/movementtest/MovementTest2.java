@@ -1,7 +1,6 @@
 package net.faroob.movementtest;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.faroob.movementtest.networking.ModMessages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

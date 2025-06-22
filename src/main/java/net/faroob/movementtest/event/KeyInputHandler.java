@@ -8,7 +8,6 @@ import net.faroob.movementtest.networking.ModMessages;
 import net.faroob.movementtest.networking.packet.SlamSlideC2SPacket;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.network.PacketByteBuf;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyInputHandler {

@@ -9,8 +9,6 @@ import net.faroob.movementtest.networking.ModMessages;
 import net.faroob.movementtest.networking.packet.DashC2SPacket;
 import net.faroob.movementtest.networking.packet.SlamSlideC2SPacket;
 
-import static net.faroob.movementtest.networking.packet.DashC2SPacket.*;
-
 public class MovementTest2Client implements ClientModInitializer {
     private static int timer = 0;
     public static int slamVelocityTimeout;
