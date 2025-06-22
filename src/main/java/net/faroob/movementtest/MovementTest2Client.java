@@ -19,6 +19,7 @@ public class MovementTest2Client implements ClientModInitializer {
     private static int dashCooldownLength = 20;
 
     @Override
+
     /*
     runs stuff on startup
      */
@@ -38,16 +39,18 @@ public class MovementTest2Client implements ClientModInitializer {
             if (SlamSlideC2SPacket.slamming) {
                 ClientPlayNetworking.send(ModMessages.SLAM_ID, PacketByteBufs.create());
                 slamVelocityTimeout = 20;
-                SlamSlideC2SPacket.slamCounter++;
+                SlamSlideC2SPacket.slamCounter += .1;
+                //System.out.println(SlamSlideC2SPacket.slamCounter);
             }
-            if (slamVelocityTimeout == 0) {
-                SlamSlideC2SPacket.slamCounter = 0;
+            if ((slamVelocityTimeout == 0  || (SlamSlideC2SPacket.onGround && !SlamSlideC2SPacket.sliding) ) && SlamSlideC2SPacket.slamCounter > 0) {
+                SlamSlideC2SPacket.slamCounter -=.1;
             }
             if (SlamSlideC2SPacket.slamCounter > 0 && SlamSlideC2SPacket.onGround) {
                 slamVelocityTimeout--;
             }
         });
     }
+
     /*
     counts the cooldown for dash
      */
@@ -64,6 +67,7 @@ public class MovementTest2Client implements ClientModInitializer {
             }
         });
     }
+
     /*
     regenerates stamina
      */
