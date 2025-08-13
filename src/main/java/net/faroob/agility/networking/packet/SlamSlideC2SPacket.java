@@ -7,11 +7,7 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class SlamSlideC2SPacket {
-    public static float yaw;
-    public static boolean sliding;
-    public static boolean onGround;
-    public static boolean slamming;
-    public static double slamCounter;
+
 
     public static void slide(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         player.velocityModified = true;

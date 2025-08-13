@@ -8,13 +8,16 @@ import net.faroob.agility.event.KeyInputHandler;
 import net.faroob.agility.networking.ModMessages;
 import net.faroob.agility.networking.packet.DashC2SPacket;
 import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+
+import static net.faroob.agility.agility.dashCooldownLength;
+import static net.faroob.agility.agility.staminaMax;
 
 public class agilityClient implements ClientModInitializer {
     private static int timer = 0;
     public static int slamVelocityTimeout;
-    public static int staminaMax = 35;
     public static double stamina = staminaMax;
-    private static final int dashCooldownLength = 20;
 
     @Override
 
@@ -30,21 +33,24 @@ public class agilityClient implements ClientModInitializer {
     }
 
     /*
-    counts how long your slam lasts for to that it can give you the correct ammount of speed in your slide
+    counts how long your slam lasts for to that it can give you the correct ammount of speed in your slide (thats what it supposed to do)
      */
     public static void slamTimerManager() {
+        DataAccessor accessor = (DataAccessor) MinecraftClient.getInstance();
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
-            if (SlamSlideC2SPacket.slamming) {
+            float slamCounter = accessor.getSlamCounter();
+            if (accessor.isSlamming()) {
                 ClientPlayNetworking.send(ModMessages.SLAM_ID, PacketByteBufs.create());
                 slamVelocityTimeout = 20;
-                SlamSlideC2SPacket.slamCounter += .1;
+                slamCounter += .1F;
             }
-            if ((slamVelocityTimeout == 0  || (SlamSlideC2SPacket.onGround && !SlamSlideC2SPacket.sliding) ) && SlamSlideC2SPacket.slamCounter > 0) {
-                SlamSlideC2SPacket.slamCounter -=.1;
+            if ((slamVelocityTimeout == 0  || (SlamSlideC2SPacket.onGround && !accessor.isSliding()) ) && slamCounter > 0) {
+                slamCounter -=.1F;
             }
-            if (SlamSlideC2SPacket.slamCounter > 0 && SlamSlideC2SPacket.onGround) {
+            if (slamCounter > 0 && SlamSlideC2SPacket.onGround) {
                 slamVelocityTimeout--;
             }
+            accessor.setSlamCounter(slamCounter);
         });
     }
 
