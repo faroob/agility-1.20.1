@@ -1,4 +1,4 @@
-package net.faroob.movementtest;
+package net.faroob.agility;
 
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 

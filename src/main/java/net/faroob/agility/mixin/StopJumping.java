@@ -1,6 +1,6 @@
-package net.faroob.movementtest.mixin;
+package net.faroob.agility.mixin;
 
-import net.faroob.movementtest.networking.packet.SlamSlideC2SPacket;
+import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

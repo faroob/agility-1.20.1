@@ -1,12 +1,12 @@
-package net.faroob.movementtest;
+package net.faroob.agility;
 
 import net.fabricmc.api.ModInitializer;
-import net.faroob.movementtest.networking.ModMessages;
+import net.faroob.agility.networking.ModMessages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MovementTest2 implements ModInitializer {
-	public static final String MOD_ID = "movementtest2";
+public class agility implements ModInitializer {
+	public static final String MOD_ID = "agility";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override

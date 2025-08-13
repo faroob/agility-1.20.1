@@ -1,9 +1,9 @@
-package net.faroob.movementtest;
+package net.faroob.agility;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
-public class MovementTest2DataGenerator implements DataGeneratorEntrypoint {
+public class agilityDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 
