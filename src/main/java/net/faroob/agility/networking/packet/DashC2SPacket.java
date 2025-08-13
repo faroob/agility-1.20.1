@@ -18,7 +18,11 @@ public class DashC2SPacket {
             double pitch = player.getPitch();
             double yaw = player.getHeadYaw();
             player.velocityModified = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)) * dashModifier, 0, Math.cos(Math.toRadians(yaw)) * dashModifier);
+            player.addVelocity(
+                    (-Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch))) * dashModifier,
+                    -Math.sin(Math.toRadians(pitch)) * dashModifier ,
+                    (Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch))) * dashModifier
+            );
             dashCooldown = true;
             stamina -= dashCost;
         }

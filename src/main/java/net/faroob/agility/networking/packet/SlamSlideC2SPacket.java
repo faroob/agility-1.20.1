@@ -20,7 +20,6 @@ public class SlamSlideC2SPacket {
             sliding = true;
             player.setVelocity(-Math.sin(Math.toRadians(yaw)), -1, Math.cos(Math.toRadians(yaw)));
         }
-        System.out.println(player.isOnGround());
     }
 
     public static void start(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

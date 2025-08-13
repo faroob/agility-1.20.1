@@ -38,7 +38,6 @@ public class agilityClient implements ClientModInitializer {
                 ClientPlayNetworking.send(ModMessages.SLAM_ID, PacketByteBufs.create());
                 slamVelocityTimeout = 20;
                 SlamSlideC2SPacket.slamCounter += .1;
-                //System.out.println(SlamSlideC2SPacket.slamCounter);
             }
             if ((slamVelocityTimeout == 0  || (SlamSlideC2SPacket.onGround && !SlamSlideC2SPacket.sliding) ) && SlamSlideC2SPacket.slamCounter > 0) {
                 SlamSlideC2SPacket.slamCounter -=.1;
