@@ -15,10 +15,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.faroob.agility.agility"
+			"net.faroob.agility.Agility"
 		],
 		"client": [
-			"net.faroob.agility.agilityClient"
+			"net.faroob.agility.AgilityClient"
 		],
 		"fabric-datagen": [
 			"net.faroob.agility.agilityDataGenerator"

@@ -1,6 +1,7 @@
 package net.faroob.agility.networking.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.faroob.agility.DataAccessor;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -10,30 +11,30 @@ public class SlamSlideC2SPacket {
 
 
     public static void slide(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        DataAccessor accessor = (DataAccessor) (Object) player;
         player.velocityModified = true;
-        onGround = player.isOnGround();
-        if (onGround) {
-            sliding = true;
-            player.setVelocity(-Math.sin(Math.toRadians(yaw)), -1, Math.cos(Math.toRadians(yaw)));
+        if (player.isOnGround()) {
+            accessor.setSliding(true);
+            player.setVelocity(-Math.sin(Math.toRadians(accessor.getAgilityYaw())), 0, Math.cos(Math.toRadians(accessor.getAgilityYaw())));
         }
     }
 
     public static void start(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        onGround = player.isOnGround();
-        if (!sliding && onGround) {
-            yaw = player.getHeadYaw();
-        }else if (!onGround) {
-            slamming = true;
+        DataAccessor accessor = (DataAccessor) (Object) player;
+        if (!accessor.isSliding() && player.isOnGround()) {
+            accessor.setAgilityYaw(player.getHeadYaw());
+        }else if (!player.isOnGround()) {
+            accessor.setSlamming(true);
             slam(server, player, handler, buf, responseSender);
         }
     }
 
     public static void slam(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        DataAccessor accessor = (DataAccessor) (Object) player;
         player.velocityModified = true;
-        onGround = player.isOnGround();
         player.setVelocity(0,-3,0);
-        if (onGround) {
-            slamming = false;
+        if (player.isOnGround()) {
+            accessor.setSlamming(false);
         }
     }
 

@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import static net.faroob.agility.agilityClient.*;
+import static net.faroob.agility.AgilityClient.*;
 
 public class DashC2SPacket {
     public static boolean dashCooldown;

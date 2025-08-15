@@ -1,6 +1,7 @@
 package net.faroob.agility.mixin;
 
-import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
+import net.faroob.agility.DataAccessor;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +13,8 @@ public class StopJumping {
 
     @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
     private void stopJumping(CallbackInfo callbackInfo) {
-        if (SlamSlideC2SPacket.sliding) {
+        DataAccessor accessor = (DataAccessor) MinecraftClient.getInstance();
+        if (accessor.isSliding()) {
             callbackInfo.cancel();
         }
     }

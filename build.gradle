@@ -11,7 +11,11 @@ base {
 
 repositories {
 	mavenCentral()
-	maven { url = "https://maven.fabricmc.net/" }
+	maven {
+		url = "https://maven.fabricmc.net/"
+		name = "Ladysnake Mods"
+		url = 'https://maven.ladysnake.org/releases'
+	}
 }
 
 fabricApi {
@@ -26,7 +30,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3"
 }
 
 processResources {
@@ -77,6 +83,6 @@ publishing {
 
 loom {
 	mixin {
-		defaultRefmapName = "mixins.movementtest2.refmap.json"
+		defaultRefmapName = "mixins.agility.refmap.json"
 	}
 }

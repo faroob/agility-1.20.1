@@ -7,14 +7,12 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.faroob.agility.event.KeyInputHandler;
 import net.faroob.agility.networking.ModMessages;
 import net.faroob.agility.networking.packet.DashC2SPacket;
-import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 
-import static net.faroob.agility.agility.dashCooldownLength;
-import static net.faroob.agility.agility.staminaMax;
+import static net.faroob.agility.Agility.dashCooldownLength;
+import static net.faroob.agility.Agility.staminaMax;
 
-public class agilityClient implements ClientModInitializer {
+public class AgilityClient implements ClientModInitializer {
     private static int timer = 0;
     public static int slamVelocityTimeout;
     public static double stamina = staminaMax;
@@ -36,18 +34,19 @@ public class agilityClient implements ClientModInitializer {
     counts how long your slam lasts for to that it can give you the correct ammount of speed in your slide (thats what it supposed to do)
      */
     public static void slamTimerManager() {
-        DataAccessor accessor = (DataAccessor) MinecraftClient.getInstance();
+
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
+            DataAccessor accessor = (DataAccessor) MinecraftClient.getInstance();
             float slamCounter = accessor.getSlamCounter();
             if (accessor.isSlamming()) {
                 ClientPlayNetworking.send(ModMessages.SLAM_ID, PacketByteBufs.create());
                 slamVelocityTimeout = 20;
                 slamCounter += .1F;
             }
-            if ((slamVelocityTimeout == 0  || (SlamSlideC2SPacket.onGround && !accessor.isSliding()) ) && slamCounter > 0) {
+            if ((slamVelocityTimeout == 0  || (minecraftClient.player.isOnGround() && !accessor.isSliding()) ) && slamCounter > 0) {
                 slamCounter -=.1F;
             }
-            if (slamCounter > 0 && SlamSlideC2SPacket.onGround) {
+            if (slamCounter > 0 && minecraftClient.player.isOnGround()) {
                 slamVelocityTimeout--;
             }
             accessor.setSlamCounter(slamCounter);

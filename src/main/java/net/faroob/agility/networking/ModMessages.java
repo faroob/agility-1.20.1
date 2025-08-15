@@ -1,16 +1,16 @@
 package net.faroob.agility.networking;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.faroob.agility.agility;
+import net.faroob.agility.Agility;
 import net.faroob.agility.networking.packet.DashC2SPacket;
 import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
 import net.minecraft.util.Identifier;
 
 public class ModMessages {
-    public static final Identifier DASH_ID = new Identifier(agility.MOD_ID, "dash");
-    public static final Identifier SLIDE_ID = new Identifier(agility.MOD_ID, "slide");
-    public static final Identifier SLAM_SLIDE_STARTED_ID = new Identifier(agility.MOD_ID, "slam_slide_started");
-    public static final Identifier SLAM_ID = new Identifier(agility.MOD_ID, "slam");
+    public static final Identifier DASH_ID = new Identifier(Agility.MOD_ID, "dash");
+    public static final Identifier SLIDE_ID = new Identifier(Agility.MOD_ID, "slide");
+    public static final Identifier SLAM_SLIDE_STARTED_ID = new Identifier(Agility.MOD_ID, "slam_slide_started");
+    public static final Identifier SLAM_ID = new Identifier(Agility.MOD_ID, "slam");
 
 
     public static void registerC2SPackets() {

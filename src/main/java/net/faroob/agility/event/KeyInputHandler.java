@@ -4,8 +4,10 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.faroob.agility.DataAccessor;
 import net.faroob.agility.networking.ModMessages;
 import net.faroob.agility.networking.packet.SlamSlideC2SPacket;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -20,17 +22,18 @@ public class KeyInputHandler {
 
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
-            if(dashKey.wasPressed()){
+            DataAccessor accessor = (DataAccessor) MinecraftClient.getInstance().player;
+            if (dashKey.wasPressed()) {
                 ClientPlayNetworking.send(ModMessages.DASH_ID, PacketByteBufs.create());
             }
-            if(slamSlideKey.wasPressed() && (!SlamSlideC2SPacket.sliding && !SlamSlideC2SPacket.slamming)){
+            if (slamSlideKey.wasPressed() && (!accessor.isSliding() && !accessor.isSlamming())) {
                 ClientPlayNetworking.send(ModMessages.SLAM_SLIDE_STARTED_ID, PacketByteBufs.create());
             }
-            if(slamSlideKey.isPressed()){
+            if (slamSlideKey.isPressed()) {
                 ClientPlayNetworking.send(ModMessages.SLIDE_ID, PacketByteBufs.create());
             }
-            if(!slamSlideKey.isPressed() || !SlamSlideC2SPacket.onGround){
-                SlamSlideC2SPacket.sliding = false;
+            if ((!slamSlideKey.isPressed() || !minecraftClient.player.isOnGround()) && MinecraftClient.getInstance().player != null) {
+                accessor.setSliding(false);
             }
         });
     }

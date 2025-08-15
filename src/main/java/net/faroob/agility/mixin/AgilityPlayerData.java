@@ -13,19 +13,19 @@ public abstract class AgilityPlayerData implements DataAccessor {
 
     @Shadow @Final private ServerStatHandler statHandler;
     @Unique
-    public float agilityYaw;
+    private float agilityYaw;
     @Unique
-    public float agilityPitch;
+    private float agilityPitch;
     @Unique
-    public float agilityStamina;
+    private float agilityStamina;
     @Unique
-    public boolean sliding;
+    private boolean sliding;
     @Unique
-    public boolean slamming;
+    private boolean slamming;
     @Unique
-    public boolean dashCooldown;
+    private boolean dashCooldown;
     @Unique
-    public float slamCounter;
+    private float slamCounter;
 
 
     @Unique
